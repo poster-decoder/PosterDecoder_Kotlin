@@ -1,0 +1,18 @@
+# gh-pages
+Gemfile
+_config.yml
+index.md
+
+# IDE
+/.idea
+local.properties
+*.iml
+
+# Build
+/.gradle
+/build
+/captures
+.externalNativeBuild
+
+# OS Generated
+.DS_Store
