@@ -1,0 +1,6 @@
+repository: poster-decoder/PosterDecoder_Kotlin
+title: Poster Decoder
+logo: /assets/img/logo.png
+description: Poster Decoder (Kotlin)
+show_downloads: true
+theme: jekyll-theme-minimal

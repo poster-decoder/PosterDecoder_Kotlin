@@ -1,0 +1,24 @@
+# source code
+/app
+build.gradle
+gradle.properties
+/gradle
+gradlew
+gradlew.bat
+settings.gradle
+
+# IDE
+/.idea
+local.properties
+*.iml
+
+# Build
+/_site
+Gemfile.lock
+/.gradle
+/build
+/captures
+.externalNativeBuild
+
+# OS Generated
+.DS_Store
