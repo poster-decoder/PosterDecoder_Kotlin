@@ -1,5 +1,5 @@
 # gh-pages
-Gemfile
+Gemfile*
 _config.yml
 index.md
 
@@ -10,6 +10,7 @@ local.properties
 
 # Build
 /.gradle
+/_site
 /build
 /captures
 .externalNativeBuild
