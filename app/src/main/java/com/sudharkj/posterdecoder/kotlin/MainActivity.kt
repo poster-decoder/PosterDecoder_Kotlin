@@ -65,9 +65,12 @@ class MainActivity : AppCompatActivity() {
                 if (requestCode == REQUEST_IMAGE_LOAD) {
                     imageUri = data.data
                 }
-                val imageIntent = Intent(this, ImageActivity::class.java)
-                imageIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-                startActivity(imageIntent)
+            }
+            imageUri?.let {
+                Intent(this, ImageActivity::class.java).also {
+                    it.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+                    startActivity(it)
+                }
             }
         }
     }
