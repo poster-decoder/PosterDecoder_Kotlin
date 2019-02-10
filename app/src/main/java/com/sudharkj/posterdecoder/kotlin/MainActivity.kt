@@ -3,7 +3,6 @@ package com.sudharkj.posterdecoder.kotlin
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -11,12 +10,11 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import com.sudharkj.posterdecoder.kotlin.utils.Helper
 
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -67,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             imageUri?.let {
-                Intent(this, ImageActivity::class.java).also {
+                Intent(this, BoundaryActivity::class.java).also {
                     it.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
                     startActivity(it)
                 }
@@ -88,14 +86,17 @@ class MainActivity : AppCompatActivity() {
             // Ensure that there's a camera activity to handle the intent
             takePictureIntent.resolveActivity(packageManager)?.also {
                 // Create the File where the photo should go
-                val photoFile: File? = try {
-                    createImageFile()
+                val photoFile: File = try {
+                    Helper().getFile(applicationContext, R.string.image_prefix).apply {
+                        imageUri = toUri()
+                        galleryAddPic()
+                    }
                 } catch (ex: IOException) {
                     // Error occurred while creating the File and return null
                     Log.e(TAG, getString(R.string.error_image_creation), ex)
                     null
-                }
-                photoFile?.also {
+                }!!
+                photoFile.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         this,
                         getString(R.string.base_package),
@@ -105,22 +106,6 @@ class MainActivity : AppCompatActivity() {
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
                 }
             }
-        }
-    }
-
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        // Create an image file name
-        val timeStamp: String = SimpleDateFormat(getString(R.string.date_format), Locale.getDefault()).format(Date())
-        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(
-            "${getString(R.string.image_prefix)}_$timeStamp", /* prefix */
-            getString(R.string.image_type), /* suffix */
-            storageDir /* directory */
-        ).apply {
-            // Broadcast pic to ACTION_VIEW intents
-            imageUri = toUri()
-            galleryAddPic()
         }
     }
 

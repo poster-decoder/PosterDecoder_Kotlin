@@ -4,8 +4,10 @@
     <string name="action_settings">Settings</string>
     <string name="date_format">yyyyMMdd_HHmmss</string>
     <string name="image_prefix">PosterDecoder</string>
-    <string name="image_type">.jpg</string>
+    <string name="cropped_image_prefix">PosterDecoder_Cropped</string>
     <string name="error_camera_unavailable">No camera activity available</string>
     <string name="error_image_creation">Error creating temporary image file</string>
     <string name="error_image_load">Error loading image</string>
+    <string name="title_activity_boundary">BoundaryActivity</string>
+    <string name="title_activity_contour">ContourActivity</string>
 </resources>
